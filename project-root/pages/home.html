@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Accueil - Gestionnaire de Tâches</title>
+  <link rel="stylesheet" href="../assets/css/home.css" />
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1 id="welcome">Bienvenue 👋</h1>
+      <nav class="nav">
+        <a href="../pages/tasks.html">Mes Tâches</a>
+        <a href="#">Profil</a>
+        <a href="../auth/logout.php" id="logoutOrLogin">Déconnexion</a>
+      </nav>
+    </header>
+
+    <section class="summary">
+      <h2>Dernières tâches</h2>
+      <div class="stats">
+        <div class="stat-box">
+          <p>Total des tâches</p>
+          <strong id="totalTasks">[nombre de taches]</strong>
+        </div>
+        <div class="stat-box">
+          <p>Complétées</p>
+          <strong id="completedTasks">[nombre de taches completes]</strong>
+        </div>
+        <div class="stat-box">
+          <p>En cours</p>
+          <strong id="ongoingTasks">[nombre de taches en cours]</strong>
+        </div>
+        <div class="stat-box">
+          <p>Non commencées</p>
+          <strong id="notStartedTasks">[nombre de taches non commencees]</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="recent-tasks">
+      <h2>Dernières tâches</h2>
+      <ul class="task-list">
+        <li><span class="emoji">✅</span>[texte derniere tache fini]</li>
+        <li><span class="emoji">🕓</span>[texte derniere tache en cours]</li>
+        <li><span class="emoji">⏳</span>[texte derniere tache non commencee]</li>
+      </ul>
+      <a class="btn" href="#">Voir toutes les tâches</a>
+    </section>
+  </div>
+
+<script>
+  // Envoie une requête HTTP pour récupérer les informations de l'utilisateur depuis le fichier user.php
+fetch('..//tasks/dahboardData.php?pages=home', {
+  credentials: 'include'
+})
+  
+    // Lorsque la réponse est reçue, on la convertit en objet JavaScript (format JSON)
+    .then(response => response.json())
+    
+    // Quand les données sont prêtes, on les utilise
+    .then(data => {
+      // On extrait le nom d'utilisateur de l'objet JSON
+      const user = data.user;
+      const totalTasks = data.nbTasks;
+      const totalTasksComp = data.nbTasksCompleted;
+      const totalTasksEnCours = data.nbTasksEnCours;
+
+      // On met à jour le texte de l'élément HTML avec l'id "welcome"
+      // pour dire "Bienvenue, [nom de l'utilisateur] 👋"
+        document.getElementById('welcome').innerText = `Bienvenue, ${user} 👋`;
+        document.getElementById('totalTasks').innerText = totalTasks;
+        document.getElementById('completedTasks').innerText = totalTasksComp;
+        document.getElementById('ongoingTasks').innerText = totalTasksEnCours;
+
+
+      if(user === 'guest') {
+        document.getElementById('logoutOrLogin').innerText = 'Se connecter';
+        document.getElementById('logoutOrLogin').setAttribute('href', '../pages/login.html');
+
+        
+      }else
+      {
+
+      }
+      console.log(`Bienvenue, ${user} 👋`);
+      console.log(`Total des tâches : ${totalTasks}`);
+
+      console.log(data);
+    });
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mes Tâches - Gestionnaire</title>
+  <link rel="stylesheet" href="../assets/css/task.css" />
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>Mes Tâches</h1>
+      <nav class="nav">
+        <a href="home.html">Accueil</a>
+        <a href="#">Profil</a>
+        <a href="../auth/logout.php" id="logoutOrLogin">Déconnexion</a>
+      </nav>
+    </header>
+
+    <section class="task-overview">
+      <div class="stats">
+        <div class="stat-box">
+          <p>Tâches</p>
+          <strong id="totalTasks">[nombre de taches au total]</strong>
+        </div>
+        <div class="stat-box">
+          <p>Complétées</p>
+          <strong id="completedTasks">[nombre de taches completes]</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="task-table">
+      <h2>Tâches Récentes</h2>
+      <a class="btn" href="../pages/creertask.html">Nouvelle tâche</a>
+      <table>
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Date limite</th>
+            <th>Statut</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Design homepage</td>
+            <td>25 mars 2024</td>
+            <td><span class="badge complete">Complétée</span></td>
+          </tr>
+          <tr>
+            <td>Write documentation</td>
+            <td>28 mars 2024</td>
+            <td><span class="badge progress">En cours</span></td>
+          </tr>
+          <tr>
+            <td>Set up database</td>
+            <td>30 mars 2024</td>
+            <td><span class="badge not-started">Non commencée</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+
+
+  <script>
+  // Envoie une requête HTTP pour récupérer les informations de l'utilisateur depuis le fichier user.php
+  fetch('..//tasks/dahboardData.php?pages=tasks',{ credentials: 'include' })
+  
+    // Lorsque la réponse est reçue, on la convertit en objet JavaScript (format JSON)
+    .then(response => response.json())
+    
+    // Quand les données sont prêtes, on les utilise
+    .then(data => {
+      // On extrait le nom d'utilisateur de l'objet JSON
+      const totalTasks = data.nbTasks;
+
+
+      // On met à jour le texte de l'élément HTML avec l'id "welcome"
+      // pour dire "Bienvenue, [nom de l'utilisateur] 👋"
+      document.getElementById('totalTasks').innerText = totalTasks;
+
+      console.log(data);
+    });
+  </script>
+
+
+</body>
+</html>

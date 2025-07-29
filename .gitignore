@@ -1,0 +1,5 @@
+docker-compose.yml
+init.sql
+project-root/config/db.php
+project-root/php/dockerfile
+*.jpeg
