@@ -27,7 +27,7 @@ body {
 .header {
   display: flex;
   justify-content: space-between;
-  align-items: center; /* Aligne le menu et le titre verticalement */
+  align-items: center;
   flex-wrap: wrap;
   margin-bottom: 2rem;
 }
@@ -75,13 +75,42 @@ label {
 
 input[type="text"],
 input[type="date"],
-select {
+select,
+textarea {
   padding: 0.6rem;
   border-radius: 6px;
   border: 1px solid #ccc;
   font-size: 1rem;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: white;
+  transition: border-color 0.2s ease;
 }
 
+/* Apparence identique à input */
+textarea {
+  resize: none !important; /* 🔒 empêche le redimensionnement manuel */
+  overflow: hidden;
+  min-height: 80px;
+  line-height: 1.4;
+  padding: 0.6rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: white;
+  transition: border-color 0.2s ease;
+}
+
+
+
+textarea:focus,
+input[type="text"]:focus {
+  outline: none;
+  border-color: #2f80ed;
+  box-shadow: 0 0 0 2px rgba(47, 128, 237, 0.2);
+}
+
+/* Bouton */
 .btn {
   background-color: #2f80ed;
   color: white;
