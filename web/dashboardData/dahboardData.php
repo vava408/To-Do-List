@@ -17,7 +17,7 @@ try {
 
 	switch ($pages) {
 		case 'home':
-			require_once __DIR__ . '/../tasks/count/countTasks.php';
+			require_once __DIR__ . '/../tasks/count/status/countTasks.php';
 			require_once __DIR__ . '/../tasks/count/status/countTasksComp.php';
 			require_once __DIR__ . '/../tasks/count/status/countTasksEnCours.php';
 			require_once __DIR__ . '/../tasks/count/status/CountTasksNotStart.php';
@@ -50,7 +50,7 @@ try {
 			break;
 
 		case 'tasks':
-			require_once __DIR__ . '/../tasks/count/countTasks.php';
+			require_once __DIR__ . '/../tasks/count/status/countTasks.php';
 			require_once __DIR__ . '/../tasks/count/status/countTasksComp.php';
 			require_once __DIR__ . '/../tasks/afficherTache.php';
 
@@ -78,7 +78,7 @@ try {
 		case 'profile' : 
 			require_once __DIR__ . '/../user/mail.php';
 			require_once __DIR__ . '/../user/dateCompte.php';
-			require_once __DIR__ . '/../tasks/count/countTasks.php';
+			require_once __DIR__ . '/../tasks/count/status/countTasks.php';
 			require_once __DIR__ . '/../tasks/count/status/countTasksComp.php';
 			require_once __DIR__ . '/../tasks/count/status/countTasksEnCours.php';
 

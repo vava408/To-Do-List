@@ -6,5 +6,12 @@ fetch('..//dashboardData/dahboardData.php?pages=pilotage', {
 	.then(response => response.json())
 	// Quand les données sont prêtes, on les utilise
 	.then(data => { 
+			console.log(data);
+			
+			const user = data.user;
+			const low = data.low;
+			const medium = data.medium;
+			const high = data.high;
 
-    })
+			
+	})
