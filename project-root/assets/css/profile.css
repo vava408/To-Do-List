@@ -1,0 +1,54 @@
+/* Style pour la page de profil */
+body {
+    background: #f4f6f8;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.profile-container {
+    max-width: 400px;
+    margin: 50px auto;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    padding: 32px 24px;
+    text-align: center;
+}
+
+.profile-info p {
+    font-size: 1.1em;
+    margin: 12px 0;
+    color: #333;
+}
+
+.profile-actions {
+    margin: 24px 0 16px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.edit-btn, .logout-btn {
+    display: block;
+    padding: 10px 0;
+    background: #1976d2;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+.edit-btn:hover {
+    background: #1565c0;
+}
+
+.logout-btn {
+    background: #e53935;
+    margin-top: 16px;
+}
+
+.logout-btn:hover {
+    background: #b71c1c;
+}
