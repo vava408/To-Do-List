@@ -12,7 +12,11 @@ function GetCountTasksCompleted()
 
     if(GetCount() != 0)
     {
-        $stmt = $pdo->prepare("SELECT COUNT(*) FROM tasks WHERE user_id = :user_id AND status = :status");
+		$stmt = $pdo->prepare(
+			"SELECT COUNT(*) 
+			FROM tasks 
+			WHERE user_id = :user_id AND status = :status"
+		);
         $stmt->execute
         ([
             'user_id' => $_SESSION['user_id'],
