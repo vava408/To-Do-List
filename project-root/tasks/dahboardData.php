@@ -19,6 +19,8 @@ switch ($pages) {
         require_once __DIR__ . '/count/countTasksComp.php';
         require_once __DIR__ .  '/count/countTasksEnCours.php';
         require_once __DIR__ .  '/count/CountTasksNotStart.php';
+        require_once __DIR__ .  '/last-task/lastTaskComplete.php';
+
 
 
 
@@ -26,6 +28,10 @@ switch ($pages) {
         $data['nbTasks'] = GetCount();
         $data['nbTasksCompleted'] = GetCountTasksCompleted();
         $data['nbTasksEnCours'] = GetCountTasksEnCours();
+        $data['nbTaskNotStart'] = GetCountTasksNotStart();
+        $data['nbTasksCompleted'] = GetCountTasksCompleted();
+        $data['lasTask'] = getLastTaskCompete();
+        
 
 
         break;
@@ -33,11 +39,14 @@ switch ($pages) {
         require_once 'user.php';
         require_once './count/countTasks.php';
         require_once './count/countTasksComp.php';
+        
 
 
         $data['user'] = getUser();
         $data['nbTasks'] = GetCount();
         $data['nbTasksCompleted'] = GetCountTasksCompleted();
+
+        
         break;
     //default:
     //    $data = ['message' => 'Page not found'];

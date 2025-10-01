@@ -1,0 +1,25 @@
+<?php 
+
+require_once __DIR__ . '/../../config/db.php';
+
+function getLastTaskCompete()
+{
+    global $pdo;
+
+    if (!isset($_SESSION['user_id'])) {
+        return "Aucune tache terminer";
+    }
+
+    $stmt = $pdo->prepare("SELECT title, updated_at, status FROM tasks WHERE user_id = :user_id AND status = :status ORDER BY updated_at DESC");
+    $stmt->execute
+    ([
+        'user_id' => $_SESSION['user_id'],
+        'status'  => "completed"
+    ]);
+
+
+    $task = $stmt->fetch(PDO::FETCH_ASSOC);
+    //echo $task['title'] + $task['updated_at']['status'];
+    return $task['title'] ?? "Aucune tâche terminée";
+}
+?>

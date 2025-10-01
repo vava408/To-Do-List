@@ -6,7 +6,7 @@ require_once __DIR__ . '/../../config/db.php';
 require_once __DIR__ . '/countTasks.php';
 
 
-function GetCountTasksEnd()
+function GetCountTasksNotStart()
 {
     global $pdo;
 

@@ -74,11 +74,14 @@
     .then(data => {
       // On extrait le nom d'utilisateur de l'objet JSON
       const totalTasks = data.nbTasks;
+      const totalTasksEnd = data.nbTasksCompleted;
 
 
       // On met à jour le texte de l'élément HTML avec l'id "welcome"
       // pour dire "Bienvenue, [nom de l'utilisateur] 👋"
       document.getElementById('totalTasks').innerText = totalTasks;
+      document.getElementById('completedTasks').innerText = totalTasksEnd;
+
 
       console.log(data);
     });
