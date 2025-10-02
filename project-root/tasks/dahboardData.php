@@ -48,6 +48,8 @@ switch ($pages) {
 	case 'tasks':
 		require_once './count/countTasks.php';
 		require_once './count/countTasksComp.php';
+		require_once './count/countTasksComp.php';
+		require_once './count/countTasksComp.php';
 
 
 		$nbTasks = GetCount();
