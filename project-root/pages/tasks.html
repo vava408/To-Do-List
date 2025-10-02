@@ -73,8 +73,8 @@
 	// Quand les données sont prêtes, on les utilise
 	.then(data => {
 	  // On extrait le nom d'utilisateur de l'objet JSON
-	  const totalTasks = data.nbTasks;
-	  const totalTasksEnd = data.nbTasksCompleted;
+	  const totalTasks = data.stat.nbTasks;
+	  const totalTasksEnd = data.stat.nbTasksCompleted;
 
 
 	  // On met à jour le texte de l'élément HTML avec l'id "welcome"

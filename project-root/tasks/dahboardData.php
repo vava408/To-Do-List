@@ -26,7 +26,6 @@ switch ($pages) {
 		$nbTasksCompleted= GetCountTasksCompleted();
 		$nbTasksEnCours = GetCountTasksEnCours();
 		$nbTaskNotStart = GetCountTasksNotStart();
-		$nbTasksCompleted = GetCountTasksCompleted();
 		$lasTaskCompleted = getLastTaskCompete();
 
 		$data =
@@ -47,13 +46,21 @@ switch ($pages) {
 		break;
 
 	case 'tasks':
-		require_once 'user.php';
 		require_once './count/countTasks.php';
 		require_once './count/countTasksComp.php';
 
-		$data['user'] = getUser();
-		$data['nbTasks'] = GetCount();
-		$data['nbTasksCompleted'] = GetCountTasksCompleted();
+
+		$nbTasks = GetCount();
+		$nbTasksCompleted= GetCountTasksCompleted();
+
+        $data =
+		[
+			"stat" =>
+			[
+                "nbTasks" => $nbTasks,
+                "nbTasksCompleted" => $nbTasksCompleted,
+            ]
+        ];
 		break;
 
 
