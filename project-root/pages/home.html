@@ -42,7 +42,7 @@
 		<section class="recent-tasks">
 			<h2>Dernières tâches</h2>
 			<ul class="task-list">
-				<li><span class="emoji">✅</span>[texte derniere tache fini]</li>
+				<li id="task-end"><span class="emoji">✅</span>[texte derniere tache fini]</li>
 				<li><span class="emoji">🕓</span>[texte derniere tache en cours]</li>
 				<li><span class="emoji">⏳</span>[texte derniere tache non commencee]</li>
 			</ul>
@@ -65,10 +65,11 @@
 	.then(data => {
 		// On extrait le nom d'utilisateur de l'objet JSON
 		const user = data.user;
-		const totalTasks = data.nbTasks;
-		const totalTasksComp = data.nbTasksCompleted;
-		const totalTasksEnCours = data.nbTasksEnCours;
-		const totalTaskNotStart      = data.nbTaskNotStart;
+		const totalTasks = data.stat.nbTasks;
+		const totalTasksComp = data.stat.nbTasksCompleted;
+		const totalTasksEnCours = data.stat.nbTasksEnCours;
+		const totalTaskNotStart      = data.stat.nbTaskNotStart;
+		const lastTaskFinish = data.lastTask.completed;
 
 		// On met à jour le texte de l'élément HTML avec l'id "welcome"
 		// pour dire "Bienvenue, [nom de l'utilisateur] 👋"
@@ -77,6 +78,7 @@
 		document.getElementById('completedTasks').innerText = totalTasksComp;
 		document.getElementById('ongoingTasks').innerText = totalTasksEnCours;
 		document.getElementById('notStartedTasks').innerText = totalTaskNotStart;
+		document.getElementById('task-end').innerText = lastTaskFinish;
 
 		if(user === 'guest')
 		{

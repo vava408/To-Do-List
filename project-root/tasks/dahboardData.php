@@ -41,7 +41,7 @@ switch ($pages) {
 			],
 			"lastTask" =>
 			[
-				"copleted" => $lasTaskCompleted
+				"completed" => $lasTaskCompleted
 			]
 		];
 		break;

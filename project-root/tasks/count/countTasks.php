@@ -13,7 +13,7 @@ function GetCount()
 	}
 	$stmt = $pdo->prepare(
 		"SELECT COUNT(*)
-		FROM nbTasks
+		FROM tasks
 		WHERE user_id = :user_id" 
 	);
 	$stmt->execute(['user_id' => $_SESSION['user_id']]);
