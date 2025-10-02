@@ -21,33 +21,42 @@ switch ($pages) {
 		require_once __DIR__ .  '/count/CountTasksNotStart.php';
 		require_once __DIR__ .  '/last-task/lastTaskComplete.php';
 
+		$user = getUser();
+		$nbTasks = GetCount();
+		$nbTasksCompleted= GetCountTasksCompleted();
+		$nbTasksEnCours = GetCountTasksEnCours();
+		$nbTaskNotStart = GetCountTasksNotStart();
+		$nbTasksCompleted = GetCountTasksCompleted();
+		$lasTaskCompleted = getLastTaskCompete();
 
-
-
-		$data['user'] = getUser();
-		$data['nbTasks'] = GetCount();
-		$data['nbTasksCompleted'] = GetCountTasksCompleted();
-		$data['nbTasksEnCours'] = GetCountTasksEnCours();
-		$data['nbTaskNotStart'] = GetCountTasksNotStart();
-		$data['nbTasksCompleted'] = GetCountTasksCompleted();
-		$data['lasTask'] = getLastTaskCompete();
-		
-
-
+		$data =
+		[
+			"user" => $user,
+			"stat" =>
+			[
+				"nbTasks"          => $nbTasks,
+				"nbTaskNotStart"   => $nbTaskNotStart,
+				"nbTasksEnCours"   => $nbTasksEnCours,
+				"nbTasksCompleted" => $nbTasksCompleted
+			],
+			"lastTask" =>
+			[
+				"copleted" => $lasTaskCompleted
+			]
+		];
 		break;
+
 	case 'tasks':
 		require_once 'user.php';
 		require_once './count/countTasks.php';
 		require_once './count/countTasksComp.php';
-		
-
 
 		$data['user'] = getUser();
 		$data['nbTasks'] = GetCount();
 		$data['nbTasksCompleted'] = GetCountTasksCompleted();
-
-		
 		break;
+
+
 	//default:
 	//    $data = ['message' => 'Page not found'];
 }
