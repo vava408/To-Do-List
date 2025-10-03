@@ -58,10 +58,12 @@ switch ($pages) {
 	case 'tasks':
 		require_once './count/countTasks.php';
 		require_once './count/countTasksComp.php';
+		require_once './afficherTache.php';
 
 
 		$nbTasks = GetCount();
 		$nbTasksCompleted= GetCountTasksCompleted();
+		$Task = getTask();
 
 		$data =
 		[
@@ -69,7 +71,8 @@ switch ($pages) {
 			[
 				"nbTasks" => $nbTasks,
 				"nbTasksCompleted" => $nbTasksCompleted,
-			]
+			],
+			"task" => $Task,
 		];
 		break;
 
