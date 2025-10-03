@@ -2,12 +2,12 @@
 
 require_once __DIR__ . '/../../config/db.php';
 
-function getLastTaskNotStart()
+function getLastTaskInProgresse()
 {
 	global $pdo;
 
 	if (!isset($_SESSION['user_id'])) {
-		return "Aucune tache terminer";
+		return "Aucune tache en cours";
 	}
 
 	$stmt = $pdo->prepare(
@@ -20,7 +20,7 @@ function getLastTaskNotStart()
 
 	$stmt->execute([
 		'user_id' => $_SESSION['user_id'],
-		'status'  => "not_started"
+		'status'  => "in_progress"
 	]);
 
 	$task = $stmt->fetch(PDO::FETCH_ASSOC);

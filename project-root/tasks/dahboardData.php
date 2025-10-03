@@ -19,7 +19,10 @@ switch ($pages) {
 		require_once __DIR__ . '/count/countTasksComp.php';
 		require_once __DIR__ .  '/count/countTasksEnCours.php';
 		require_once __DIR__ .  '/count/CountTasksNotStart.php';
-		require_once __DIR__ .  '/last-task/lastTaskComplete.php';
+		require_once __DIR__ .  '/lastTask/lastTaskComplete.php';
+		require_once __DIR__ .  '/lastTask/lastTaskInProgresse.php';
+		require_once __DIR__ .  '/lastTask/lastTaskNotStarted.php';
+
 
 		$user = getUser();
 		$nbTasks = GetCount();
@@ -27,6 +30,9 @@ switch ($pages) {
 		$nbTasksEnCours = GetCountTasksEnCours();
 		$nbTaskNotStart = GetCountTasksNotStart();
 		$lasTaskCompleted = getLastTaskCompete();
+		$lastTaskInProgresse = getLastTaskInProgresse();
+		$lastTaskNotStart = getlastTaskNotStart();
+
 
 		$data =
 		[
@@ -40,7 +46,11 @@ switch ($pages) {
 			],
 			"lastTask" =>
 			[
-				"completed" => $lasTaskCompleted
+				"completed" => $lasTaskCompleted,
+				"inProgresse" => $lastTaskInProgresse,
+				"notStated" => $lastTaskNotStart,
+				
+
 			]
 		];
 		break;
@@ -48,21 +58,19 @@ switch ($pages) {
 	case 'tasks':
 		require_once './count/countTasks.php';
 		require_once './count/countTasksComp.php';
-		require_once './count/countTasksComp.php';
-		require_once './count/countTasksComp.php';
 
 
 		$nbTasks = GetCount();
 		$nbTasksCompleted= GetCountTasksCompleted();
 
-        $data =
+		$data =
 		[
 			"stat" =>
 			[
-                "nbTasks" => $nbTasks,
-                "nbTasksCompleted" => $nbTasksCompleted,
-            ]
-        ];
+				"nbTasks" => $nbTasks,
+				"nbTasksCompleted" => $nbTasksCompleted,
+			]
+		];
 		break;
 
 

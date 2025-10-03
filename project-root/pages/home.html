@@ -43,8 +43,8 @@
 			<h2>Dernières tâches</h2>
 			<ul class="task-list">
 				<li><span class="emoji">✅</span> <span id="task-end" >[texte derniere tache fini]</span></li>
-				<li><span class="emoji">🕓</span>[texte derniere tache en cours]</li>
-				<li><span class="emoji">⏳</span>[texte derniere tache non commencee]</li>
+				<li><span class="emoji">🕓</span><span id="task-in-progresse">[texte derniere tache en cours]</span></li>
+				<li><span class="emoji">⏳</span><span id="task-not-start">[texte derniere tache non commencee]</span</li>
 			</ul>
 			<a class="btn" href="#">Voir toutes les tâches</a>
 		</section>
@@ -70,6 +70,8 @@
 		const totalTasksEnCours = data.stat.nbTasksEnCours;
 		const totalTaskNotStart      = data.stat.nbTaskNotStart;
 		const lastTaskFinish = data.lastTask.completed;
+		const lastTaskInProgresse = data.lastTask.inProgresse;
+		const lastTaskNotStart = data.lastTask.notStated;
 
 		// On met à jour le texte de l'élément HTML avec l'id "welcome"
 		// pour dire "Bienvenue, [nom de l'utilisateur] 👋"
@@ -79,6 +81,9 @@
 		document.getElementById('ongoingTasks').innerText = totalTasksEnCours;
 		document.getElementById('notStartedTasks').innerText = totalTaskNotStart;
 		document.getElementById('task-end').innerText = lastTaskFinish;
+		document.getElementById('task-in-progresse').innerText = lastTaskInProgresse;
+		document.getElementById('task-not-start').innerText = lastTaskNotStart;
+
 
 		if(user === 'guest')
 		{
