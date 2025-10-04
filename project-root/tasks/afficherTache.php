@@ -14,7 +14,7 @@ function getTask()
 		"SELECT title, due_date, status 
 		FROM tasks 
 		WHERE user_id = :user_id  
-		ORDER BY due_date DESC
+		ORDER BY due_date AND status DESC
 		LIMIT 20"
 	);
 
@@ -22,7 +22,6 @@ function getTask()
 		'user_id' => $_SESSION['user_id'],
 	]);
 
-	$task = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC); // renvoie un tableau associatif
 
-	return $task ?? "Aucune tâche terminée";
 }

@@ -23,11 +23,11 @@
 			<div class="stats">
 				<div class="stat-box">
 					<p>Tâches</p>
-					<strong id="totalTasks">[nombre de taches au total]</strong>
+					<strong id="totalTasks">0</strong>
 				</div>
 				<div class="stat-box">
 					<p>Complétées</p>
-					<strong id="completedTasks">[nombre de taches completes]</strong>
+					<strong id="completedTasks">0</strong>
 				</div>
 			</div>
 		</section>
@@ -43,49 +43,60 @@
 						<th>Statut</th>
 					</tr>
 				</thead>
-				<tbody>
-					<tr>
-						<td>Design homepage</td>
-						<td>25 mars 2024</td>
-						<td><span class="badge complete">Complétée</span></td>
-					</tr>
-					<tr>
-						<td>Write documentation</td>
-						<td>28 mars 2024</td>
-						<td><span class="badge progress">En cours</span></td>
-					</tr>
-					<tr>
-						<td>Set up database</td>
-						<td>30 mars 2024</td>
-						<td><span class="badge not-started">Non commencée</span></td>
-					</tr>
+				<tbody id="t-body">
+					<!-- Les tâches seront insérées ici dynamiquement -->
 				</tbody>
 			</table>
 		</section>
 	</div>
-
-
-	<script>
-		// Envoie une requête HTTP pour récupérer les informations de l'utilisateur depuis le fichier user.php
-		fetch('..//tasks/dahboardData.php?pages=tasks', { credentials: 'include' })
-
-			// Lorsque la réponse est reçue, on la convertit en objet JavaScript (format JSON)
-			.then(response => response.json())
-
-			// Quand les données sont prêtes, on les utilise
-			.then(data => {
-				const totalTasks = data.stat.nbTasks;
-				const totalTasksEnd = data.stat.nbTasksCompleted;
-
-				document.getElementById('totalTasks').innerText = totalTasks;
-				document.getElementById('completedTasks').innerText = totalTasksEnd;
-
-
-				console.log(data);
-			});
-	</script>
-
-
 </body>
 
 </html>
+
+<script>
+	fetch('../tasks/dahboardData.php?pages=tasks', { credentials: 'include' })
+		.then(response => response.json())
+		.then(data => {
+			// Mise à jour des statistiques
+			document.getElementById('totalTasks').innerText = data.stat.nbTasks;
+			document.getElementById('completedTasks').innerText = data.stat.nbTasksCompleted;
+
+			const tbody = document.getElementById("t-body");
+			tbody.innerHTML = ""; // vider les lignes statiques
+
+			data.task.forEach((task, index) => {
+				const tr = document.createElement("tr");
+				tr.id = `task-${index}`;
+
+				// Colonne : titre
+				const tdTitle = document.createElement("td");
+				tdTitle.textContent = task.title;
+				// associe a la ligne
+				tr.appendChild(tdTitle);
+
+				// Colonne : date limite
+				const tdDate = document.createElement("td");
+				tdDate.textContent = task.due_date || "Pas de date";
+				// associe a la ligne
+				tr.appendChild(tdDate);
+
+				// Colonne : statut avec badge
+				const tdStatus = document.createElement("td");
+				const span = document.createElement("span");
+				span.textContent = task.status;
+
+				if (task.status === "completed") span.className = "badge complete";
+				else if (task.status === "in_progress") span.className = "badge progress";
+				else span.className = "badge not-started";
+
+				// associe a la ligne
+				tdStatus.appendChild(span);
+				// associe a la ligne
+				tr.appendChild(tdStatus);
+
+				// associe a la ligne
+				tbody.appendChild(tr);
+			});
+		})
+		.catch(error => console.error('Erreur :', error));
+</script>
