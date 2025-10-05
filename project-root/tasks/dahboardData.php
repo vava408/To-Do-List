@@ -63,7 +63,7 @@ switch ($pages) {
 
 		$nbTasks = GetCount();
 		$nbTasksCompleted= GetCountTasksCompleted();
-		$Task = getTask();
+		$task = getTask();
 
 		$data =
 		[
@@ -72,9 +72,17 @@ switch ($pages) {
 				"nbTasks" => $nbTasks,
 				"nbTasksCompleted" => $nbTasksCompleted,
 			],
-			"task" => $Task,
+			"task" => $task,
 		];
 		break;
+
+	case 'mesTasks' : 
+		require_once './afficherTouteTaches.php';
+
+		$allTask = getTouteTask();
+
+		$data = ["mesTasks" => $allTask];
+	break;
 
 
 	//default:
