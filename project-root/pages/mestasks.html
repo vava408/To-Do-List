@@ -1,11 +1,136 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mes taches</title>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Mes Tâches - Gestionnaire</title>
+	<link rel="stylesheet" href="../assets/css/home.css" />
+	<style>
+		/* --- Ajustements spécifiques pour la page Mes Tâches --- */
+
+		.task-list li {
+			background: #f8f9fb;
+			border-left: 4px solid #2f80ed;
+			padding: 1rem;
+			margin-bottom: 0.75rem;
+			border-radius: 8px;
+			display: flex;
+			align-items: flex-start;
+			word-wrap: break-word;
+			overflow-wrap: break-word;
+			white-space: normal;
+			max-width: 100%;
+		}
+
+		.task-list li div {
+			flex: 1;
+			overflow: hidden;
+			word-break: break-word;
+		}
+
+		.task-list li strong {
+			display: block;
+			font-size: 1rem;
+			margin-bottom: 0.25rem;
+			color: #1f2d3d;
+		}
+
+		.task-list li p {
+			margin: 0.25rem 0 0.5rem;
+			font-size: 0.9rem;
+			color: #444;
+			line-height: 1.4;
+			word-break: break-word;
+		}
+
+		.task-list li small {
+			display: block;
+			font-size: 0.85rem;
+			color: #666;
+		}
+
+		.task-list .emoji {
+			margin-right: 0.8rem;
+			font-size: 1.3rem;
+			flex-shrink: 0;
+			padding-top: 0.2rem;
+		}
+
+		/* Ajustement du fond selon le statut */
+		.task-list li.completed {
+			background: #e9fbe7;
+			border-left-color: #4caf50;
+		}
+
+		.task-list li.in_progress {
+			background: #fff8e1;
+			border-left-color: #ffb300;
+		}
+
+		.task-list li.not_started {
+			background: #f2f4f8;
+			border-left-color: #9e9e9e;
+		}
+	</style>
 </head>
+
 <body>
-    
+	<div class="container">
+		<header class="header">
+			<h1>Mes Tâches 📝</h1>
+			<nav class="nav">
+				<a href="../pages/home.html">Accueil</a>
+				<a href="#">Profil</a>
+				<a href="../auth/logout.php" id="logoutOrLogin">Déconnexion</a>
+			</nav>
+		</header>
+
+		<section class="recent-tasks">
+			<h2>Liste de mes tâches</h2>
+			<ul class="task-list" id="taskList">
+				<!-- Les tâches seront insérées ici -->
+			</ul>
+		</section>
+	</div>
+
+	<script>
+		fetch('../tasks/dahboardData.php?pages=mesTasks', {
+			credentials: 'include'
+		})
+			.then(response => response.json())
+			.then(data => {
+				const mesTasks = data.mesTasks;
+				const taskList = document.getElementById('taskList');
+
+				mesTasks.forEach(task => {
+					const li = document.createElement('li');
+					let emoji = '⏳';
+					let statusClass = 'not_started';
+
+					if (task.status === 'completed') {
+						emoji = '✅';
+						statusClass = 'completed';
+					} else if (task.status === 'in_progress') {
+						emoji = '🕓';
+						statusClass = 'in_progress';
+					}
+
+					li.classList.add(statusClass);
+					li.innerHTML = `
+					<span class="emoji">${emoji}</span>
+					<div>
+						<strong>${task.title}</strong>
+						<p>${task.description ? task.description : '<em>Aucune description</em>'}</p>
+						<small>Échéance : ${task.due_date}</small>
+						<small>Statut : <em>${task.status.replace('_', ' ')}</em></small>
+					</div>
+				`;
+					taskList.appendChild(li);
+				});
+			})
+			.catch(error => console.error("Erreur lors du chargement des tâches :", error));
+	</script>
 </body>
+
 </html>
