@@ -1,4 +1,6 @@
+/* ------------------------------ */
 /* Style pour la page de profil */
+/* ------------------------------ */
 body {
 	background: #f4f6f8;
 	font-family: 'Segoe UI', Arial, sans-serif;
@@ -11,7 +13,7 @@ body {
 	margin: 50px auto;
 	background: #fff;
 	border-radius: 12px;
-	box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 	padding: 32px 24px;
 	text-align: center;
 }
@@ -20,6 +22,7 @@ body {
 	font-size: 1.1em;
 	margin: 12px 0;
 	color: #333;
+	word-wrap: break-word;
 }
 
 .profile-actions {
@@ -29,7 +32,8 @@ body {
 	gap: 12px;
 }
 
-.edit-btn, .logout-btn {
+.edit-btn,
+.logout-btn {
 	display: block;
 	padding: 10px 0;
 	background: #1976d2;
@@ -38,6 +42,8 @@ body {
 	border-radius: 6px;
 	font-weight: 500;
 	transition: background 0.2s;
+	width: 100%;
+	text-align: center;
 }
 
 .edit-btn:hover {
@@ -51,4 +57,46 @@ body {
 
 .logout-btn:hover {
 	background: #b71c1c;
+}
+
+/* ------------------------------ */
+/* 🌐 RESPONSIVE DESIGN */
+/* ------------------------------ */
+
+/* Tablettes (max 992px) */
+@media (max-width: 992px) {
+	.profile-container {
+		max-width: 350px;
+		padding: 28px 20px;
+	}
+
+	.profile-info p {
+		font-size: 1em;
+	}
+
+	.edit-btn,
+	.logout-btn {
+		padding: 9px 0;
+		font-size: 0.95rem;
+	}
+}
+
+/* Smartphones (max 600px) */
+@media (max-width: 600px) {
+	.profile-container {
+		max-width: 90%;
+		margin: 30px auto;
+		padding: 24px 16px;
+	}
+
+	.profile-info p {
+		font-size: 0.95rem;
+		margin: 10px 0;
+	}
+
+	.edit-btn,
+	.logout-btn {
+		padding: 10px 0;
+		font-size: 0.9rem;
+	}
 }

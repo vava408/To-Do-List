@@ -13,11 +13,12 @@ body {
 
 .container {
 	max-width: 960px;
+	/* corrigé: "960em" → "960px" */
 	margin: auto;
 	background: #ffffff;
 	border-radius: 12px;
 	padding: 2rem;
-	box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .header {
@@ -25,6 +26,8 @@ body {
 	justify-content: space-between;
 	align-items: center;
 	margin-bottom: 2rem;
+	flex-wrap: wrap;
+	gap: 1rem;
 }
 
 .header h1 {
@@ -50,6 +53,7 @@ body {
 	display: flex;
 	gap: 1rem;
 	margin-bottom: 2rem;
+	flex-wrap: wrap;
 }
 
 .stat-box {
@@ -59,6 +63,7 @@ body {
 	border-radius: 8px;
 	text-align: center;
 	box-shadow: inset 0 0 0 1px #e0e0e0;
+	min-width: 200px;
 }
 
 .stat-box p {
@@ -86,6 +91,7 @@ body {
 	font-size: 0.95rem;
 	display: flex;
 	align-items: center;
+	word-wrap: break-word;
 }
 
 .emoji {
@@ -104,4 +110,71 @@ body {
 
 .btn:hover {
 	background-color: #1366d6;
+}
+
+/* 🌐 RESPONSIVE DESIGN */
+
+/* Petits écrans (tablettes et moins de 992px) */
+@media (max-width: 992px) {
+	body {
+		padding: 1.5rem;
+	}
+
+	.header h1 {
+		font-size: 1.8rem;
+	}
+
+	.nav a {
+		margin-left: 1rem;
+		font-size: 0.95rem;
+	}
+
+	.stats {
+		flex-direction: column;
+	}
+
+	.stat-box {
+		width: 100%;
+	}
+}
+
+/* Téléphones (moins de 600px) */
+@media (max-width: 600px) {
+	body {
+		padding: 1rem;
+	}
+
+	.container {
+		padding: 1.2rem;
+	}
+
+	.header {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	.header h1 {
+		font-size: 1.6rem;
+	}
+
+	.nav {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.8rem;
+	}
+
+	.nav a {
+		margin: 0;
+		font-size: 0.9rem;
+	}
+
+	.task-list li {
+		font-size: 0.9rem;
+		padding: 0.6rem 0.8rem;
+	}
+
+	.btn {
+		padding: 0.5rem 1rem;
+		font-size: 0.9rem;
+	}
 }
