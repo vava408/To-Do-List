@@ -10,12 +10,15 @@ function getTouteTask()
 		return "Aucune tache";
 	}
 
-	$stmt = $pdo->prepare(
-		"SELECT title, due_date, status, description  
-		FROM tasks 
-		WHERE user_id = :user_id  
-		ORDER BY due_date AND status DESC"
-	);
+	$stmt = $pdo->prepare("
+			SELECT title, due_date, status, description
+			FROM tasks
+			WHERE user_id = :user_id
+			ORDER BY 
+				status DESC ,
+				ABS(DATEDIFF(due_date, CURDATE())) ASC "
+			);
+
 
 	$stmt->execute([
 		'user_id' => $_SESSION['user_id'],
