@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Profil</title>
+	<link rel="stylesheet" href="../assets/css/profile.css">
+</head>
+
+<body>
+	<div class="container">
+		<header class="header">
+			<h1>Mon Profil 👤</h1>
+			<nav class="nav">
+				<a href="../pages/tasks.html">Accueil</a>
+				<a href="../pages/profile.html">Profil</a>
+				<a href="../auth/logout.php" id="logoutOrLogin">Déconnexion</a>
+			</nav>
+		</header>
+
+		<div class="profile-section">
+			<div class="profile-header">
+				<div class="profile-avatar">
+					👤
+				</div>
+				<div class="profile-info">
+					<h2 id="userName">[username]</h2>
+					<p id="userEmail">[mail]</p>
+				</div>
+			</div>
+
+			<h3 class="section-title">Informations personnelles</h3>
+			<div class="info-grid">
+				<div class="info-card">
+					<h3>📧 Email</h3>
+					<p id="emailInfo">[mail]</p>
+				</div>
+				<div class="info-card">
+					<h3>📅 Membre depuis</h3>
+					<p id="memberSince">[date]</p>
+				</div>
+				<div class="info-card">
+					<h3>🎯 Rôle</h3>
+					<p id="userRole">[role]</p>
+				</div>
+				<!--<div class="info-card">
+					<h3>⚡ Statut</h3>
+					<p id="userStatus">Actif</p>
+				</div> -->
+			</div>
+
+			<h3 class="section-title">Statistiques</h3>
+			<div class="stats">
+				<div class="stat-box">
+					<p>Tâches créées</p>
+					<strong id="tasksCreated">[toute taches]</strong>
+				</div>
+				<div class="stat-box">
+					<p>Tâches terminées</p>
+					<strong id="tasksCompleted">[taches fini]</strong>
+				</div>
+				<div class="stat-box">
+					<p>Tâches en cours</p>
+					<strong id="tasksPending">[taches en cours]</strong>
+				</div>
+			</div>
+
+			<h3 class="section-title">Actions</h3>
+			<div class="btn-group">
+				<button class="btn" onclick="alert('Fonction de modification du profil')">✏️ Modifier le profil</button>
+				<button class="btn btn-secondary" onclick="alert('Fonction de changement de mot de passe')">🔒 Changer
+					le mot de passe</button>
+				<button class="btn btn-secondary" onclick="alert('Fonction de suppression de compte')">🗑️ Supprimer le
+					compte</button>
+			</div>
+		</div>
+	</div>
+</body>
+
+<script>
+	// Envoie une requête HTTP pour récupérer les informations de l'utilisateur depuis le fichier user.php
+	fetch('..//tasks/dahboardData.php?pages=profile', {
+		credentials: 'include'
+	})
+
+		// Lorsque la réponse est reçue, on la convertit en objet JavaScript (format JSON)
+		.then(response => response.json())
+
+		// Quand les données sont prêtes, on les utilise
+		.then(data => {
+
+
+		})
+
+</script>
+
+</html>
+
