@@ -1,136 +1,148 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>Mes Tâches - Gestionnaire</title>
 	<link rel="stylesheet" href="../assets/css/home.css" />
 	<style>
-		/* --- Ajustements spécifiques pour la page Mes Tâches --- */
 
-		.task-list li {
-			background: #f8f9fb;
-			border-left: 4px solid #2f80ed;
-			padding: 1rem;
-			margin-bottom: 0.75rem;
-			border-radius: 8px;
-			display: flex;
-			align-items: flex-start;
-			word-wrap: break-word;
-			overflow-wrap: break-word;
-			white-space: normal;
-			max-width: 100%;
-		}
-
-		.task-list li div {
-			flex: 1;
-			overflow: hidden;
-			word-break: break-word;
-		}
-
-		.task-list li strong {
-			display: block;
-			font-size: 1rem;
-			margin-bottom: 0.25rem;
-			color: #1f2d3d;
-		}
-
-		.task-list li p {
-			margin: 0.25rem 0 0.5rem;
-			font-size: 0.9rem;
-			color: #444;
-			line-height: 1.4;
-			word-break: break-word;
-		}
-
-		.task-list li small {
-			display: block;
-			font-size: 0.85rem;
-			color: #666;
-		}
-
-		.task-list .emoji {
-			margin-right: 0.8rem;
-			font-size: 1.3rem;
-			flex-shrink: 0;
-			padding-top: 0.2rem;
-		}
-
-		/* Ajustement du fond selon le statut */
-		.task-list li.completed {
-			background: #e9fbe7;
-			border-left-color: #4caf50;
-		}
-
-		.task-list li.in_progress {
-			background: #fff8e1;
-			border-left-color: #ffb300;
-		}
-
-		.task-list li.not_started {
-			background: #f2f4f8;
-			border-left-color: #9e9e9e;
-		}
 	</style>
 </head>
 
 <body>
 	<div class="container">
 		<header class="header">
-			<h1>Mes Tâches 📝</h1>
+			<h1>Mes Tâches 📋</h1>
 			<nav class="nav">
 				<a href="../pages/home.html">Accueil</a>
 				<a href="#">Profil</a>
 				<a href="../auth/logout.php" id="logoutOrLogin">Déconnexion</a>
-			</nav>
+			</nav>		
 		</header>
 
 		<section class="recent-tasks">
 			<h2>Liste de mes tâches</h2>
-			<ul class="task-list" id="taskList">
-				<!-- Les tâches seront insérées ici -->
-			</ul>
+			
+			<!-- Contrôles de filtrage -->
+			<div class="controls">
+				<div class="filter-group">
+					<button class="filter-btn active" data-filter="all">Toutes</button>
+					<button class="filter-btn" data-filter="not_started">À faire</button>
+					<button class="filter-btn" data-filter="in_progress">En cours</button>
+					<button class="filter-btn" data-filter="completed">Terminées</button>
+				</div>
+				<div class="search-box">
+					<input type="text" id="searchInput" placeholder="🔍 Rechercher une tâche...">
+				</div>
+			</div>
+
+			<!-- Compteur -->
+			<div class="task-counter" id="taskCounter"></div>
+
+			<!-- Liste des tâches -->
+			<ul class="task-list" id="taskList"></ul>
 		</section>
 	</div>
 
 	<script>
+		let allTasks = [];
+		let currentFilter = 'all';
+
+		// Charger les tâches
 		fetch('../tasks/dahboardData.php?pages=mesTasks', {
 			credentials: 'include'
 		})
-			.then(response => response.json())
-			.then(data => {
-				const mesTasks = data.mesTasks;
-				const taskList = document.getElementById('taskList');
+		.then(response => response.json())
+		.then(data => {
+			allTasks = data.mesTasks;
+			renderTasks();
+		})
+		.catch(error => console.error("Erreur lors du chargement des tâches :", error));
 
-				mesTasks.forEach(task => {
-					const li = document.createElement('li');
-					let emoji = '⏳';
-					let statusClass = 'not_started';
+		// Rendu des tâches
+		function renderTasks(filter = 'all', searchTerm = '') {
+			const taskList = document.getElementById('taskList');
+			const taskCounter = document.getElementById('taskCounter');
+			taskList.innerHTML = '';
 
-					if (task.status === 'completed') {
-						emoji = '✅';
-						statusClass = 'completed';
-					} else if (task.status === 'in_progress') {
-						emoji = '🕓';
-						statusClass = 'in_progress';
-					}
+			// Filtrer les tâches
+			let filteredTasks = allTasks;
+			
+			if (filter !== 'all') {
+				filteredTasks = filteredTasks.filter(task => task.status === filter);
+			}
 
-					li.classList.add(statusClass);
-					li.innerHTML = `
+			if (searchTerm) {
+				filteredTasks = filteredTasks.filter(task => 
+					task.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+					(task.description && task.description.toLowerCase().includes(searchTerm.toLowerCase()))
+				);
+			}
+
+			// Trier par date d'échéance
+			filteredTasks.sort((a, b) => new Date(a.due_date) - new Date(b.due_date));
+
+			// Afficher le compteur
+			taskCounter.textContent = `${filteredTasks.length} tâche(s) affichée(s)`;
+
+			// Afficher les tâches
+			if (filteredTasks.length === 0) {
+				taskList.innerHTML = '<div class="empty-state">Aucune tâche trouvée</div>';
+				return;
+			}
+
+			filteredTasks.forEach(task => {
+				const li = document.createElement('li');
+				let emoji = '⏳';
+				let statusClass = 'not_started';
+				let statusText = 'À faire';
+
+				if (task.status === 'completed') {
+					emoji = '✅';
+					statusClass = 'completed';
+					statusText = 'Terminée';
+				} else if (task.status === 'in_progress') {
+					emoji = '🕓';
+					statusClass = 'in_progress';
+					statusText = 'En cours';
+				}
+
+				// Vérifier si la date est dépassée
+				const isOverdue = new Date(task.due_date) < new Date() && task.status !== 'completed';
+				const dueDateText = isOverdue ? `⚠️ ${task.due_date} (en retard)` : task.due_date;
+
+				li.classList.add(statusClass);
+				li.innerHTML = `
 					<span class="emoji">${emoji}</span>
-					<div>
+					<div class="task-content">
 						<strong>${task.title}</strong>
 						<p>${task.description ? task.description : '<em>Aucune description</em>'}</p>
-						<small>Échéance : ${task.due_date}</small>
-						<small>Statut : <em>${task.status.replace('_', ' ')}</em></small>
+						<div class="task-meta">
+							<span>📅 ${dueDateText}</span>
+							<span>📊 ${statusText}</span>
+						</div>
 					</div>
 				`;
-					taskList.appendChild(li);
-				});
-			})
-			.catch(error => console.error("Erreur lors du chargement des tâches :", error));
+				taskList.appendChild(li);
+			});
+		}
+
+		// Gestion des filtres
+		document.querySelectorAll('.filter-btn').forEach(btn => {
+			btn.addEventListener('click', function() {
+				document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+				this.classList.add('active');
+				currentFilter = this.dataset.filter;
+				const searchTerm = document.getElementById('searchInput').value;
+				renderTasks(currentFilter, searchTerm);
+			});
+		});
+
+		// Gestion de la recherche
+		document.getElementById('searchInput').addEventListener('input', function(e) {
+			renderTasks(currentFilter, e.target.value);
+		});
 	</script>
 </body>
-
 </html>
