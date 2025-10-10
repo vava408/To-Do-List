@@ -10,6 +10,8 @@ $data = [];
 try {
 	// Inclusion du fichier user
 	require_once __DIR__ . '/../user/user.php';
+	$user = getUser();
+
 
 	$pages = $_GET['pages'] ?? 'default';
 
@@ -23,7 +25,6 @@ try {
 			require_once __DIR__ . '/../tasks/lastTask/lastTaskInProgresse.php';
 			require_once __DIR__ . '/../tasks/lastTask/lastTaskNotStarted.php';
 
-			$user = getUser();
 			$nbTasks = GetCount();
 			$nbTasksCompleted = GetCountTasksCompleted();
 			$nbTasksEnCours = GetCountTasksEnCours();
@@ -73,6 +74,17 @@ try {
 			$data = ["mesTasks" => $allTask];
 			break;
 
+		case 'profile' : 
+			require_once __DIR__ . '/../user/mail.php';
+
+			$mail = getMail();
+
+			$data = [
+				"user" => $user,
+				"mail" => $mail,
+			];
+			
+			break;
 		default:
 			$data = ["message" => "Page not found"];
 	}
