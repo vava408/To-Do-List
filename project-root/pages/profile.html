@@ -80,7 +80,7 @@
 
 <script>
 	// Envoie une requête HTTP pour récupérer les informations de l'utilisateur depuis le fichier user.php
-	fetch('..//tasks/dahboardData.php?pages=profile', {
+	fetch('..//dashboardData/dahboardData.php?pages=profile', {
 		credentials: 'include'
 	})
 
@@ -89,6 +89,16 @@
 
 		// Quand les données sont prêtes, on les utilise
 		.then(data => {
+			const user = data.user;
+			const mail = data.mail;
+
+			document.getElementById('userName').innerText = user;
+			document.getElementById('userEmail').innerText = mail;
+			document.getElementById('emailInfo').innerText = mail;
+			document.getElementById('completedTasks').innerText = totalTasksComp;
+			document.getElementById('ongoingTasks').innerText = totalTasksEnCours;
+
+
 
 
 		})
