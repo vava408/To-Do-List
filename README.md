@@ -24,3 +24,6 @@ To do list est une application web qui vous permet de gérer vos tâches pour po
 
 
 ##  📥 Installation 
+
+## Collaborateur
+  <img src="https://github.com/Patate276.png" width="80" alt="Patate276"/>
