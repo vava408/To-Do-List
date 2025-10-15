@@ -69,8 +69,7 @@
 			<h3 class="section-title">Actions</h3>
 			<div class="btn-group">
 				<button class="btn" id="editProfileBtn">✏️ Modifier le profil</button>
-				<button class="btn btn-secondary" id="editPassBtn">🔒 Changer</button>
-					le mot de passe</button>
+				<button class="btn btn-secondary" id="editPassBtn">🔒 Changer le mot de passe</button>
 				<button class="btn btn-secondary" id="deleteProfileBtn">🗑️ Supprimer le
 					compte</button>
 			</div>
@@ -104,11 +103,11 @@
 			document.getElementById('tasksPending').innerText = totalTasksEnCours;
 
 			document.getElementById('editProfileBtn').addEventListener('click', () => {
-				window.location.href = 'pages/ModifProfils.html';
+				window.location.href = 'ModifProfils.html';
 			})
 
 			document.getElementById('editPassBtn').addEventListener('click', () => {
-				window.location.href = 'pages/modifPassword.html';
+				window.location.href = 'modifPassword.html';
 			})
 
 			document.getElementById('deleteProfileBtn').addEventListener('click', () => {
