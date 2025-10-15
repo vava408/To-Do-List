@@ -68,10 +68,10 @@
 
 			<h3 class="section-title">Actions</h3>
 			<div class="btn-group">
-				<button class="btn" onclick="alert('Fonction de modification du profil')">✏️ Modifier le profil</button>
-				<button class="btn btn-secondary" onclick="alert('Fonction de changement de mot de passe')">🔒 Changer
+				<button class="btn" id="editProfileBtn">✏️ Modifier le profil</button>
+				<button class="btn btn-secondary" id="editPassBtn">🔒 Changer</button>
 					le mot de passe</button>
-				<button class="btn btn-secondary" onclick="alert('Fonction de suppression de compte')">🗑️ Supprimer le
+				<button class="btn btn-secondary" id="deleteProfileBtn">🗑️ Supprimer le
 					compte</button>
 			</div>
 		</div>
@@ -91,15 +91,29 @@
 		.then(data => {
 			const user = data.user;
 			const mail = data.mail;
+			const totalTasksComp = data.nbTasksCompleted;
+			const totalTasksEnCours = data.nbTasksEnCours;
+			const nbTask = data.nbTasks;
 
 			document.getElementById('userName').innerText = user;
 			document.getElementById('userEmail').innerText = mail;
 			document.getElementById('emailInfo').innerText = mail;
-			document.getElementById('completedTasks').innerText = totalTasksComp;
-			document.getElementById('ongoingTasks').innerText = totalTasksEnCours;
+			
+			document.getElementById("tasksCreated").innerText = nbTask;
+			document.getElementById('tasksCompleted').innerText = totalTasksComp;
+			document.getElementById('tasksPending').innerText = totalTasksEnCours;
 
+			document.getElementById('editProfileBtn').addEventListener('click', () => {
+				window.location.href = 'pages/ModifProfils.html';
+			})
 
+			document.getElementById('editPassBtn').addEventListener('click', () => {
+				window.location.href = 'pages/modifPassword.html';
+			})
 
+			document.getElementById('deleteProfileBtn').addEventListener('click', () => {
+				window.location.href = '../auth/deleteUser.php';
+			})
 
 		})
 

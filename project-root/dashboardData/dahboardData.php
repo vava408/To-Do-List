@@ -76,12 +76,25 @@ try {
 
 		case 'profile' : 
 			require_once __DIR__ . '/../user/mail.php';
+			require_once __DIR__ . '/../tasks/count/countTasks.php';
+			require_once __DIR__ . '/../tasks/count/countTasksComp.php';
+			require_once __DIR__ . '/../tasks/count/countTasksEnCours.php';
+
+
 
 			$mail = getMail();
+			$nbTasks = GetCount();
+			$nbTasksCompleted = GetCountTasksCompleted();
+			$nbTasksEnCours = GetCountTasksEnCours();
+
+
 
 			$data = [
 				"user" => $user,
 				"mail" => $mail,
+				"nbTasks" => $nbTasks,
+				"nbTasksCompleted" => $nbTasksCompleted,
+				"nbTasksEnCours" => $nbTasksEnCours,
 			];
 			
 			break;
