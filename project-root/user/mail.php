@@ -7,10 +7,10 @@
 		global $pdo;
 
 		//echo $_SESSION['user_id'];
-		if(!isset($_SESSION['user_id']))
+		if(!isset($_SESSION['user_id']) || $_SESSION['user_id'] == 0 )
 		{
 			//echo 'non connecter';
-			return $_SESSION['user_id'];
+			return "mail";
 		}
 		$stmt = $pdo->prepare(
 			"SELECT email 
