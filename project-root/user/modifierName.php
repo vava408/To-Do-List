@@ -15,7 +15,7 @@ session_start();
 	}
 
 	$stmt = $pdo->prepare(
-		"UPDATE users SET username= :username WHERE id= : user_id");
+		"UPDATE users SET username= :username WHERE id= :user_id");
 
 
 
