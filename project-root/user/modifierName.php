@@ -1,6 +1,9 @@
 <?php
+session_start();
 
-	require_once __DIR__ . '/../config/db.php';
+	$username = trim($_POST['username']);
+
+	require_once('./../config/db.php');
 
 	global $pdo;
 
@@ -12,16 +15,14 @@
 	}
 
 	$stmt = $pdo->prepare(
-		"SELECT username
-		FROM users
-		WHERE id = :id"
-	);
+		"UPDATE users SET username= :username WHERE id= : user_id");
+
+
 
 	$stmt->execute([
-		'id' => $_SESSION['user_id'],
+		'username' => $username,
+		'user_id' => $_SESSION['user_id']
 	]);
 
-	$mail = $stmt->fetchColumn();
-
+	echo "Nom d'utilisateur changé avec succès.";
 ?>
-
