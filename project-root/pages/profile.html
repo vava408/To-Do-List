@@ -89,6 +89,7 @@
 		// Quand les données sont prêtes, on les utilise
 		.then(data => {
 			const user = data.user;
+			const date = data.date;
 			const mail = data.mail;
 			const totalTasksComp = data.nbTasksCompleted;
 			const totalTasksEnCours = data.nbTasksEnCours;
@@ -96,7 +97,8 @@
 
 			document.getElementById('userName').innerText = user;
 			document.getElementById('userEmail').innerText = mail;
-			document.getElementById('emailInfo').innerText = mail;
+			document.getElementById('memberSince').innerText = mail;
+			document.getElementById('emailInfo').innerText = date;
 			
 			document.getElementById("tasksCreated").innerText = nbTask;
 			document.getElementById('tasksCompleted').innerText = totalTasksComp;
