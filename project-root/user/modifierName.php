@@ -1,28 +1,32 @@
 <?php
 session_start();
 
-	$username = trim($_POST['username']);
 
 	require_once('./../config/db.php');
 
 	global $pdo;
 
+	$username = trim($_POST['username']);
+
+
 	//echo $_SESSION['user_id'];
 	if(!isset($_SESSION['user_id']))
 	{
 		//echo 'non connecter';
-		return $_SESSION['user_id'];
+		return;
 	}
 
 	$stmt = $pdo->prepare(
-		"UPDATE users SET username= :username WHERE id= :user_id");
+		"UPDATE users SET username = :username WHERE id = :user_id");
 
 
 
 	$stmt->execute([
 		'username' => $username,
-		'user_id' => $_SESSION['user_id']
+		'user_id' => $_SESSION['user_id'],
 	]);
 
-	echo "Nom d'utilisateur changé avec succès.";
+	$userid = $_SESSION['user_id'];
+
+	echo "Nom d'utilisateur changé avec succès. $username + $userid";
 ?>
