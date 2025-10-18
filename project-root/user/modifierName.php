@@ -28,5 +28,10 @@ session_start();
 
 	$userid = $_SESSION['user_id'];
 
-	echo "Nom d'utilisateur changé avec succès. $username + $userid";
+	$_SESSION['user'] = $username;
+
+	header("Location: ../pages/home.html");
+	
+
+	//echo "Nom d'utilisateur changé avec succès. $username + $userid";
 ?>
