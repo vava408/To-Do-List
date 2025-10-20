@@ -2,7 +2,7 @@
 $host = "mysql-airbot.alwaysdata.net";
 $dbname = "airbot_siteperso";
 $username = "airbot";     // ton utilisateur Alwaysdata
-$password = "vava11ba"; // ton mot de passe Alwaysdata
+$password = "vairbot11ba"; // ton mot de passe Alwaysdata
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
