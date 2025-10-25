@@ -22,11 +22,33 @@ Elle est **synchronisée avec une base de données**, ce qui vous permet une **s
 
 ---
 
-## 📁 Structure du fichier  
+## 📁 Structure du fichier
+
+````
+C:.
+├───mobile/                → Application mobile développée avec React Native
+│
+└───web/                   → Application web
+    ├───assets/            → Contient les scripts JavaScript et les feuilles de style CSS
+    │   ├───css/           → Regroupe l’ensemble des styles du site
+    │   └───js/            → Contient tous les scripts JavaScript du site
+    │
+    ├───auth/              → Gère la connexion, la déconnexion et la suppression de compte ou de session
+    ├───config/            → Contient les fichiers de configuration (connexion aux services, base de données, etc.)
+    ├───dashboardData/     → Fournit les données au format JSON en fonction du lien
+    ├───includes/          → Gère les sessions et les fichiers inclus communs
+    ├───pages/             → Contient les pages principales de l’application
+    ├───tasks/             → Regroupe tout ce qui est lié à la gestion des tâches (affichage, suppression, édition, etc.)
+    │   ├───count/         → Compte le nombre total de tâches
+    │   └───lastTask/      → Affiche les dernières tâches enregistrées
+    │
+    └───user/              → Contient tout ce qui concerne la gestion des utilisateurs
+
+````
 
 ### 📄 Explication des fichiers  
 
-*(Section à compléter selon la structure du projet)*  
+
 
 ---
 
