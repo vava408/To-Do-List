@@ -5,6 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 		<title>Modifier profil</title>
 		<link rel="stylesheet" href="../assets/css/create-task.css" />
+		<script type="module" src="../assets/js/tailleTexte.js"></script>
 	</head>
 
 	<body>
@@ -30,14 +31,5 @@
 			</form>
 
 		</div>
-
-		<!-- Script pour agrandissement automatique du textarea -->
-		<script>
-			const textarea = document.getElementById("description");
-			textarea.addEventListener("input", function () {
-				this.style.height = "auto";
-				this.style.height = this.scrollHeight + "px";
-			});
-		</script>
 	</body>
 </html>
