@@ -1,3 +1,5 @@
+import { changerButtonConnexion } from "./bouttonConnexion.js";
+
 // Envoie une requête HTTP pour récupérer les informations de l'utilisateur depuis le fichier user.php
 fetch('..//dashboardData/dahboardData.php?pages=profile', {
 	credentials: 'include'
@@ -12,6 +14,14 @@ fetch('..//dashboardData/dahboardData.php?pages=profile', {
 		const totalTasksComp = data.nbTasksCompleted;
 		const totalTasksEnCours = data.nbTasksEnCours;
 		const nbTask = data.nbTasks;
+
+		console.log(data)
+
+		if(user === 'Guest')
+		{
+			changerButtonConnexion();
+		}
+
 		document.getElementById('userName').innerText = user;
 		document.getElementById('userEmail').innerText = mail;
 		document.getElementById('emailInfo').innerText = mail;
@@ -29,4 +39,5 @@ fetch('..//dashboardData/dahboardData.php?pages=profile', {
 		document.getElementById('deleteProfileBtn').addEventListener('click', () => {
 			window.location.href = '../auth/deleteUser.php';
 		})
+
 	})

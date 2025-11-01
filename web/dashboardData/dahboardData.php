@@ -59,6 +59,7 @@ try {
 			$task = getTask();
 
 			$data = [
+				"user" => $user,
 				"stat" => [
 					"nbTasks" => $nbTasks,
 					"nbTasksCompleted" => $nbTasksCompleted,

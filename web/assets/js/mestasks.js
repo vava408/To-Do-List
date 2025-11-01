@@ -1,17 +1,46 @@
+import { changerButtonConnexion } from "./bouttonConnexion.js";
+
 let allTasks = [];
 let currentFilter = 'all';
 // Charger les tâches
 fetch('..//dashboardData/dahboardData.php?pages=mesTasks', {
-	credentials: 'include'
+    credentials: 'include'
 })
 .then(response => response.json())
 .then(data => {
-	allTasks = data.mesTasks;
-	renderTasks();
+    allTasks = data.mesTasks;
+    if(allTasks == undefined || allTasks.length === 0 || allTasks === "Aucune tache")
+    {
+        changerButtonConnexion();
+        const taskList = document.getElementById('taskList');
+        const taskCounter = document.getElementById('taskCounter');
+        taskCounter.textContent = '0 tâche(s) affichée(s)';
+        
+        let message = '';
+        switch(currentFilter) {
+            case 'completed':
+                message = 'Aucune tâche n\'a été terminée';
+                break;
+            case 'in_progress':
+                message = 'Aucune tâche n\'est en cours';
+                break;
+            case 'not_started':
+                message = 'Aucune tâche n\'est à faire';
+                break;
+            default:
+                message = 'Aucune tâche n\'a été créée';
+        }
+        taskList.innerHTML = `<div class="empty-state">${message}</div>`;
+    }
+    else
+    {
+        renderTasks();
+    }
 })
 .catch(error => console.error("Erreur lors du chargement des tâches :", error));
 // Rendu des tâches
 function renderTasks(filter = 'all', searchTerm = '') {
+	console.log(allTasks)
 	const taskList = document.getElementById('taskList');
 	const taskCounter = document.getElementById('taskCounter');
 	taskList.innerHTML = '';
@@ -33,9 +62,23 @@ function renderTasks(filter = 'all', searchTerm = '') {
 	taskCounter.textContent = `${filteredTasks.length} tâche(s) affichée(s)`;
 	// Afficher les tâches
 	if (filteredTasks.length === 0) {
-		taskList.innerHTML = '<div class="empty-state">Aucune tâche trouvée</div>';
-		return;
-	}
+        let message = '';
+        switch(filter) {
+            case 'completed':
+                message = 'Aucune tâche n\'a été terminée';
+                break;
+            case 'in_progress':
+                message = 'Aucune tâche n\'est en cours';
+                break;
+            case 'not_started':
+                message = 'Aucune tâche n\'est à faire';
+                break;
+            default:
+                message = searchTerm ? 'Aucune tâche trouvée' : 'Aucune tâche n\'a été créée';
+        }
+        taskList.innerHTML = `<div class="empty-state">${message}</div>`;
+        return;
+    }
 	filteredTasks.forEach(task => {
 		const li = document.createElement('li');
 		let emoji = '⏳';

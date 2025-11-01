@@ -2,13 +2,20 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-	<title>Créer une Tâche</title>
-	<link rel="stylesheet" href="../assets/css/create-task.css" />
-	<script type="module" src="../assets/js/tailleTexte.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Créer une Tâche</title>
+
+<!-- Style de la page -->
+<link rel="stylesheet" href="../assets/css/create-task.css" />
+
+<!-- Script perso pour la taille du texte -->
+<script type="module" src="../assets/js/tailleTexte.js"></script>
 </head>
+
 <body>
 	<div class="container">
+
+		<!-- En‐tête avec navigation -->
 		<header class="header">
 			<h1>Créer une Tâche</h1>
 			<nav class="nav">
@@ -18,33 +25,81 @@
 			</nav>
 		</header>
 
-		<form class="task-form" action="../tasks/add.php" method="POST">
-		<div class="form-group">
-			<label for="title">Nom de la tâche</label>
-			<input type="text" id="title" name="title" required>
-		</div>
+		<!-- Zone où le message de succès/erreur sera affiché -->
+		<div id="message" style="margin-bottom: 15px; font-weight:bold;"></div>
 
-		<div class="form-group">
-			<label for="description">Description</label>
-			<textarea id="description" name="description" rows="3" required></textarea>
-		</div>
+		<!-- Formulaire de création de tâche -->
+		<!-- Pas de action/method car c'est géré en JS -->
+		<form id="taskForm" class="task-form">
+		
+			<div class="form-group">
+				<label for="title">Nom de la tâche</label>
+				<input type="text" id="title" name="title" required>
+			</div>
 
-		 <div class="form-group">
-			<label for="due_date">Date limite</label>
-			<input type="date" id="due_date" name="due_date" required>
-		</div>
+			<div class="form-group">
+				<label for="description">Description</label>
+				<textarea id="description" name="description" rows="3" required></textarea>
+			</div>
 
-		<div class="form-group">
-			<label for="status">Statut</label>
-			<select id="status" name="status" required>
-				<option value="not_started">Non commencée</option>
-				<option value="in_progress">En cours</option>
-				<option value="completed">Complétée</option>
-			</select>
-		</div>
+			<div class="form-group">
+				<label for="due_date">Date limite</label>
+				<input type="date" id="due_date" name="due_date" required>
+			</div>
+
+			<div class="form-group">
+				<label for="status">Statut</label>
+				<select id="status" name="status" required>
+					<option value="not_started">Non commencée</option>
+					<option value="in_progress">En cours</option>
+					<option value="completed">Complétée</option>
+				</select>
+			</div>
 
 			<button type="submit" class="btn">Créer la tâche</button>
 		</form>
 	</div>
+
+<!-- Script AJAX -->
+<script>
+// On ajoute un "listener" sur le formulaire quand il est soumis
+document.querySelector('#taskForm').addEventListener('submit', async (e) => {
+
+	// Empêche le rechargement normal de la page
+	e.preventDefault();
+
+	// Récupère les données du formulaire
+	const formData = new FormData(e.target);
+
+	// Envoie des données au fichier PHP via fetch (AJAX)
+	const response = await fetch('../tasks/add.php', {
+		method: 'POST',
+		body: formData
+	});
+
+	// On récupère la réponse JSON envoyée par add.php
+	const result = await response.json();
+
+	// Sélecteur où on affiche le message
+	const msg = document.querySelector('#message');
+
+	// Si le PHP renvoie une erreur
+	if (result.error) {
+		msg.textContent = result.error;
+		msg.style.color = 'red';
+
+	// Si le PHP renvoie un succès
+	} else if (result.success) {
+		msg.textContent = result.success;
+		msg.style.color = 'green';
+
+		// Redirection vers la liste des tâches après 1 seconde
+		setTimeout(() => {
+			window.location.href = "tasks.html";
+		}, 1000);
+	}
+});
+</script>
+
 </body>
 </html>

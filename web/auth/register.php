@@ -30,6 +30,8 @@ try {
         'password' => $hashedPassword
     ]);
     echo "Inscription réussie !";
+    header("Location: ../pages/login.html");
+
 } catch (PDOException $e) {
     echo "Erreur lors de l'inscription : " . $e->getMessage();
 }
