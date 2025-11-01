@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-theme="light">
 
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>Mes Tâches - Gestionnaire</title>
+	<script src="../assets/js/darkMode.js"></script>
 	<link rel="stylesheet" href="../assets/css/task.css" />
   <script type="module" src="../assets/js/tasks.js"></script>  
 </head>
@@ -14,6 +15,15 @@
 		<header class="header">
 			<h1>Mes Tâches</h1>
 			<nav class="nav">
+				<div class="theme-switch-wrapper">
+				    <label class="theme-switch" for="theme-toggle">
+				        <input type="checkbox" id="theme-toggle" data-theme-toggler />
+				        <div class="slider">
+				            <span class="slider-icon light">☀️</span>
+				            <span class="slider-icon dark">🌙</span>
+						 </div>
+				    </label>
+				</div>
 				<a href="home.html">Accueil</a>
 				<a href="profile.html">Profil</a>
 				<a href="../auth/logout.php" id="logoutOrLogin">Déconnexion</a>
