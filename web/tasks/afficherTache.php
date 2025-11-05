@@ -14,7 +14,7 @@ function getTask()
 		"SELECT title, due_date, status 
 		FROM tasks 
 		WHERE user_id = :user_id  
-		ORDER BY due_date AND status DESC
+		ORDER BY PRIORITY DESC
 		LIMIT 20"
 	);
 
