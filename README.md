@@ -10,14 +10,14 @@ Elle est **synchronisée avec une base de données**, ce qui vous permet une **s
 - ✨ Créer une tâche avec un statut  
 - 🔐 Connexion / Inscription  
 - 🔄 Modifier le mot de passe  
-- 👤 Modifier le nom d’utilisateur  
+- 👤 Modifier le nom d’utilisateur
+- ⚡ Afficher les tâches en fonction du niveau de priorité   
 
 ---
 
 ## 🛠️ Fonctionnalités prévues  
 
 - 📝 Modifier une tâche  
-- ⚡ Afficher les tâches en fonction du niveau de priorité  
 - 📱 Créer une application mobile sur téléphone avec **React Native**  
 
 ---
@@ -62,5 +62,6 @@ C:.
 
 #### 🔐 Système de modification de mot de passe et du profil  
 <img src="https://github.com/CookIsLife.png" width="80" alt="CookIsLife" style="border-radius: 50%;"/>  
+
 
 **[@CookIsLife](https://github.com/CookIsLife)**  
