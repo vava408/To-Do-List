@@ -4,14 +4,16 @@
 	{
 		
 		if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-			return true;
 			
 			$subject = "Code de verification. Ne pas répondre!";
 			$destinataire = $email;
-			$message = "Votre code de validation est $code";
 			$code = 0000;
+			$message = "Votre code de validation est $code";
 
 			mail($destinataire, $subject,$message);
+
+			return true;
+
 
 
 		} else {
