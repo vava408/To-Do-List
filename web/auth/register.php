@@ -1,6 +1,6 @@
 <?php
 require_once('../config/db.php'); // Inclure la connexion PDO
-require_once('verifyEmal.php');
+require_once('./email/verifyEmail.php');
 
 $username = trim($_POST['username']);
 $email = trim($_POST['email']);
