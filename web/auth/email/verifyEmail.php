@@ -1,15 +1,18 @@
 <?php
 
-	function getEmailValide($email)
+	function getEmailValide($email, $userName, $userId)
 	{
 		require_once('generCode.php');
+		require_once('../../includes/sessionCode.php');
 		
 		if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
 			
 			$subject = "Code de verification. Ne pas répondre!";
 			$destinataire = $email;
 			$code = genereCode();
-			$message = "Votre code de validation est $code";
+			$message = "Bienvenue $userName sur To Do list. Votre code de validation est $code";
+
+			genereSessionCode($code);
 
 			mail($destinataire, $subject,$message);
 

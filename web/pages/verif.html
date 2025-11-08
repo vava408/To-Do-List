@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Créer une Tâche</title>
+
+<script src="../assets/js/darkMode.js"></script>
+
+
+<!-- Style de la page -->
+<link rel="stylesheet" href="../assets/css/create-task.css" />
+
+<!-- Script perso pour la taille du texte -->
+<script type="module" src="../assets/js/tailleTexte.js"></script>
+</head>
+
+<body>
+	<div class="container">
+
+		<!-- En‐tête avec navigation -->
+		<header class="header">
+			<h1>Créer une Tâche</h1>
+			<nav class="nav">
+				<div class="theme-switch-wrapper">
+				    <label class="theme-switch" for="theme-toggle">
+				        <input type="checkbox" id="theme-toggle" data-theme-toggler />
+				        <div class="slider">
+				            <span class="slider-icon light">☀️</span>
+				            <span class="slider-icon dark">🌙</span>
+						 </div>
+				    </label>
+				</div>
+				<a href="home.html">Accueil</a>
+				<a href="tasks.html">Mes Tâches</a>
+				<a href="../auth/logout.php" id="logoutOrLogin">Déconnexion</a>
+			</nav>
+		</header>
+
+		<!-- Zone où le message de succès/erreur sera affiché -->
+		<div id="message" style="margin-bottom: 15px; font-weight:bold;"></div>
+
+		<!-- Formulaire de création de tâche -->
+		<!-- Pas de action/method car c'est géré en JS -->
+		<form id="taskForm" class="task-form">
+		
+			<div class="form-group">
+				<label for="code">Entrer le code</label>
+				<input type="int" id="code" name="code" required>
+			</div>
+			<button type="submit" class="btn">Envoyer</button>
+		</form>
+	</div>
+<!-- Script AJAX -->
+<script>
+// On ajoute un "listener" sur le formulaire quand il est soumis
+document.querySelector('#taskForm').addEventListener('submit', async (e) => {
+
+	// Empêche le rechargement normal de la page
+	e.preventDefault();
+
+	// Récupère les données du formulaire
+	const formData = new FormData(e.target);
+
+	// Envoie des données au fichier PHP via fetch (AJAX)
+	const response = await fetch('../auth/verifeierLecode.php', {
+		method: 'POST',
+		body: formData
+	});
+
+	// On récupère la réponse JSON envoyée par add.php
+	const result = await response.json();
+
+	// Sélecteur où on affiche le message
+	const msg = document.querySelector('#message');
+
+	// Si le PHP renvoie une erreur
+	if (result.error) {
+		msg.textContent = result.error;
+		msg.style.color = 'red';
+
+	// Si le PHP renvoie un succès
+	} else if (result.success) {
+		msg.textContent = result.success;
+		msg.style.color = 'green';
+
+		// Redirection vers la liste des tâches après 1 seconde
+		setTimeout(() => {
+			window.location.href = "tasks.html";
+		}, 1000);
+	}
+});
+</script>
+
+</body>
+</html>
+
