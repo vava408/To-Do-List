@@ -1,6 +1,7 @@
 <?php
 require_once('../config/db.php'); // Inclure la connexion PDO
-require_once('./email/verifyEmail.php');
+require_once('./email/sendMail.php');
+require_once('./email/generCode.php');
 
 $username = trim($_POST['username']);
 $email = trim($_POST['email']);
@@ -19,32 +20,20 @@ if ($stmt->fetch()) {
 	exit;
 }
 
-//verifie la validité de l'email
-if(!getEmailValide($email))
-{
-	echo "Erreur dans le mail";
-}
-else
-{
-	echo "ok";
+$code = genereCode();
+
+$stmt = $pdo->prepare("INSERT INTO temp_users (username, email, password_hash, code, expires_at)
+                       VALUES (:username, :email, :password_hash, :code, DATE_ADD(NOW(), INTERVAL 15 MINUTE))");
+$stmt->execute([
+    'username' => $username,
+    'email' => $email,
+    'password_hash' => $hashedPassword,
+    'code' => $code
+]);
+
+$tempId = $pdo->lastInsertId();
+sendMail($email, $username, $code);
+header("Location: ../pages/verif.html");
 
 
-	// Hasher le mot de passe
-	$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-	
-	// Insérer dans la base
-	$stmt = $pdo->prepare("INSERT INTO users (username, email, password) VALUES (:username, :email, :password)");
-	try {
-		$stmt->execute([
-			'username' => $username,
-			'email' => $email,
-			'password' => $hashedPassword
-		]);
-		echo "Inscription réussie !";
-		header("Location: ../pages/login.html");
-	
-	} catch (PDOException $e) {
-		echo "Erreur lors de l'inscription : " . $e->getMessage();
-	}
-}
 ?>

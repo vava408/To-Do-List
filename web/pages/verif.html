@@ -63,7 +63,7 @@ document.querySelector('#taskForm').addEventListener('submit', async (e) => {
 	const formData = new FormData(e.target);
 
 	// Envoie des données au fichier PHP via fetch (AJAX)
-	const response = await fetch('../auth/verifeierLecode.php', {
+	const response = await fetch('../auth/verifierLecode.php', {
 		method: 'POST',
 		body: formData
 	});

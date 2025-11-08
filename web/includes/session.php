@@ -14,4 +14,4 @@ function sessionStart($userName, $userid)
 	
 	//echo "Session started. User: " . $_SESSION['user'] . " (ID: " . $_SESSION['user_id'] . ")<br>";
 }
-?>
+?>	
