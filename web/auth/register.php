@@ -35,6 +35,8 @@ $stmt->execute([
 ]);
 
 $tempId = $pdo->lastInsertId();
+session_start();
+$_SESSION['pending_temp_id'] = $tempId;
 sendMail($email, $username, $code);
 header("Location: ../pages/verif.html");
 exit;
