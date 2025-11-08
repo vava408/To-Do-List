@@ -22,6 +22,9 @@ if ($stmt->fetch()) {
 
 $code = genereCode();
 
+$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+
 $stmt = $pdo->prepare("INSERT INTO temp_users (username, email, password_hash, code, expires_at)
                        VALUES (:username, :email, :password_hash, :code, DATE_ADD(NOW(), INTERVAL 15 MINUTE))");
 $stmt->execute([
@@ -34,6 +37,6 @@ $stmt->execute([
 $tempId = $pdo->lastInsertId();
 sendMail($email, $username, $code);
 header("Location: ../pages/verif.html");
-
+exit;
 
 ?>
