@@ -22,6 +22,7 @@ if (!isset($_SESSION['pending_temp_id'])) {
 
 $tempId = (int) $_SESSION['pending_temp_id'];
 
+// Vérifie si le code existe et n'est pas expiré
 $stmt = $pdo->prepare("SELECT * FROM temp_users WHERE id = :id AND expires_at > NOW()");
 $stmt->execute(['id' => $tempId]);
 $temp = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -49,6 +50,7 @@ try {
 
     $userId = $pdo->lastInsertId();
 
+    // Supprime l'utilisateur temporaire
     $pdo->prepare("DELETE FROM temp_users WHERE id = :id")->execute(['id' => $tempId]);
 
     $pdo->commit();
@@ -58,16 +60,11 @@ try {
     exit;
 }
 
-// Nettoyage et connexion de l’utilisateur
+// Nettoyage et connexion utilisateur
 unset($_SESSION['pending_temp_id']);
-
-// ⚠️ Remplace ceci par ta propre fonction si elle existe dans session.php
-if (function_exists('sessionStart')) {
-    sessionStart($temp['username'], $userId);
-} else {
-    $_SESSION['user_id'] = $userId;
-    $_SESSION['username'] = $temp['username'];
-}
+$_SESSION['user_id'] = $userId;
+$_SESSION['username'] = $temp['username'];
 
 echo json_encode(['success' => 'Compte validé et connecté !']);
 exit;
+?>
