@@ -3,8 +3,11 @@ session_start();
 require_once('../config/db.php');
 require_once('./session.php');
 
-header('Content-Type: application/json; charset=utf-8');
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
+
+header('Content-Type: application/json; charset=utf-8');
 $codeInput = trim($_POST['code'] ?? '');
 if ($codeInput === '') { echo json_encode(['error'=>'Veuillez entrer le code']); exit; }
 
