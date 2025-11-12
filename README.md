@@ -69,7 +69,7 @@ C:.
 
 ## 📥 Installation  
 
-Pour voir des emples utiliser l'adrreesse mail :  **root@root** avec le mots de passe: **toor**
+Pour voir des exemples utiliser l'adresse mail :  **root@root** avec le mots de passe: **toor**
 
 ---
 
@@ -80,3 +80,4 @@ Pour voir des emples utiliser l'adrreesse mail :  **root@root** avec le mots de 
 
 
 **[@CookIsLife](https://github.com/CookIsLife)**  
+
