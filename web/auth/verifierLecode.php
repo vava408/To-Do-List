@@ -61,7 +61,7 @@ try {
 }
 
 // Nettoyage et connexion utilisateur
-unset($_SESSION['pending_temp_id']);
+session_destroy();
 $userId = $userId;
 $username = $temp['username'];
 
