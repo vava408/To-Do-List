@@ -62,8 +62,10 @@ try {
 
 // Nettoyage et connexion utilisateur
 unset($_SESSION['pending_temp_id']);
-$_SESSION['user_id'] = $userId;
-$_SESSION['username'] = $temp['username'];
+$userId = $userId;
+$username = $temp['username'];
+
+sessionStart($username, $userId);
 
 echo json_encode(['success' => 'Compte validé et connecté !']);
 exit;

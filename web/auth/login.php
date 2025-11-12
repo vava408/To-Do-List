@@ -27,8 +27,9 @@ if (!password_verify($password, $user['password'])) {
 
 // Authentification réussie
 $userName = $user['username'];
-$_SESSION['user_id'] = $user['id'];
+$userId = $user['id'];
 require_once('../includes/session.php');
+sessionStart($userName, $userId);
 //echo "Connexion réussie. Bienvenue, utilisateur : " . $_SESSION['user'];
 header("Location: ../pages/home.html");
 exit;
