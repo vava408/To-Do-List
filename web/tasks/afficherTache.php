@@ -22,6 +22,6 @@ function getTask()
 		'user_id' => $_SESSION['user_id'],
 	]);
 
-    return $stmt->fetchAll(PDO::FETCH_ASSOC); // renvoie un tableau associatif
+	return $stmt->fetchAll(PDO::FETCH_ASSOC); // renvoie un tableau associatif
 
 }

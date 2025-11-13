@@ -11,7 +11,7 @@ function getTouteTask()
 	}
 
 	$stmt = $pdo->prepare("
-			SELECT title, due_date, status, description
+			SELECT id, title, due_date, status, description
 			FROM tasks
 			WHERE user_id = :user_id
 			ORDER BY 

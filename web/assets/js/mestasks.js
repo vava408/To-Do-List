@@ -107,8 +107,11 @@ function renderTasks(filter = 'all', searchTerm = '') {
 					<span>📊 ${statusText}</span>
 				</div>
 			</div>
+		<a href="modifierTasks.html?idTask=${task.id}" class="btn">Modifier la tache</a>
+
 		`;
 		taskList.appendChild(li);
+
 	});
 }
 // Gestion des filtres
