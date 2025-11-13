@@ -26,7 +26,7 @@ function GetCountTasksCompleted()
         
         if($countCompeted == 0)
         {
-            return "Aucune taches n'as était compléter";
+            return "Aucune taches complétées";
         }
 
         return $countCompeted ?: "Aucune taches n'as était complétée";
