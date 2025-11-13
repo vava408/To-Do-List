@@ -107,7 +107,7 @@ function renderTasks(filter = 'all', searchTerm = '') {
 					<span>📊 ${statusText}</span>
 				</div>
 			</div>
-		<a href="../pages/modifierTasks.html?idTask=${task.id}" class="btn">Modifier la tache</a>
+		<a href="../../pages/modifierTasks.html?idTask=${task.id}" class="btn">Modifier la tache</a>
 
 		`;
 		taskList.appendChild(li);
