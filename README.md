@@ -29,7 +29,7 @@ Elle est **synchronisée avec une base de données**, ce qui vous permet une **s
 - Afficher plus clairement les taches prioritaires
 - Mettre les s en automatique
 - Crées des aides / ou bien afficher des detaillesquand tu passes ta sourit dessus / guide d'utilisation 
-- faire unn onglet pilotages qui afichera le nombre de taches urgente faite dans la semaine / detaille des tahces effectuer
+- faire un onglet pilotages qui afichera le nombre de taches urgente faite dans la semaine / detaille des tahces effectuer
 - Ajout d'un calendrier
 - Envoie de mail pour dire faire la taches. 
 - Choisir delai  ou repeter tout les x temps

@@ -11,7 +11,9 @@ fetch('..//dashboardData/dahboardData.php?pages=pilotage', {
 			const user = data.user;
 			const low = data.low;
 			const medium = data.medium;
-			const high = data.high;
+			const high = data.higt;
 
-			
+		document.getElementById('high').textContent = high;
+		document.getElementById('medium').textContent = medium;
+		document.getElementById('low').textContent = low;
 	})
