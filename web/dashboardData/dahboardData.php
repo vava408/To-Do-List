@@ -18,9 +18,9 @@ try {
 	switch ($pages) {
 		case 'home':
 			require_once __DIR__ . '/../tasks/count/countTasks.php';
-			require_once __DIR__ . '/../tasks/count/countTasksComp.php';
-			require_once __DIR__ . '/../tasks/count/countTasksEnCours.php';
-			require_once __DIR__ . '/../tasks/count/CountTasksNotStart.php';
+			require_once __DIR__ . '/../tasks/count/status/countTasksComp.php';
+			require_once __DIR__ . '/../tasks/count/status/countTasksEnCours.php';
+			require_once __DIR__ . '/../tasks/count/status/CountTasksNotStart.php';
 			require_once __DIR__ . '/../tasks/lastTask/lastTaskComplete.php';
 			require_once __DIR__ . '/../tasks/lastTask/lastTaskInProgresse.php';
 			require_once __DIR__ . '/../tasks/lastTask/lastTaskNotStarted.php';
@@ -51,7 +51,7 @@ try {
 
 		case 'tasks':
 			require_once __DIR__ . '/../tasks/count/countTasks.php';
-			require_once __DIR__ . '/../tasks/count/countTasksComp.php';
+			require_once __DIR__ . '/../tasks/count/status/countTasksComp.php';
 			require_once __DIR__ . '/../tasks/afficherTache.php';
 
 			$nbTasks = GetCount();
@@ -79,8 +79,8 @@ try {
 			require_once __DIR__ . '/../user/mail.php';
 			require_once __DIR__ . '/../user/dateCompte.php';
 			require_once __DIR__ . '/../tasks/count/countTasks.php';
-			require_once __DIR__ . '/../tasks/count/countTasksComp.php';
-			require_once __DIR__ . '/../tasks/count/countTasksEnCours.php';
+			require_once __DIR__ . '/../tasks/count/status/countTasksComp.php';
+			require_once __DIR__ . '/../tasks/count/status/countTasksEnCours.php';
 
 
 
@@ -102,6 +102,20 @@ try {
 			];
 			
 			break;
+			case 'pilotage' : 
+					require_once __DIR__ . '/../tasks/count/priority/low.php';
+					require_once __DIR__ . '/../tasks/count/priority/medium.php';
+					require_once __DIR__ . '/../tasks/count/priority/higth.php';
+
+					$data = [
+						"user" => $user,
+						"low"  => GetCountLow(),
+						"medium" => GetCountMedium(),
+						"higt" => GetCountHigt(),
+					];
+ 
+				
+				break;
 		default:
 			$data = ["message" => "Page not found"];
 	}
