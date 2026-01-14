@@ -33,6 +33,7 @@ Elle est **synchronisée avec une base de données**, ce qui vous permet une **s
 - Ajout d'un calendrier
 - Envoie de mail pour dire faire la taches. 
 - Choisir delai  ou repeter tout les x temps
+- 
 
 
 ---
@@ -80,4 +81,3 @@ Pour voir des exemples utiliser l'adresse mail :  **root@root** avec le mots de 
 
 
 **[@CookIsLife](https://github.com/CookIsLife)**  
-

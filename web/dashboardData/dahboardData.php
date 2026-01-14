@@ -8,6 +8,9 @@ header('Content-Type: application/json');
 $data = [];
 
 try {
+	// Inclusion de la configuration de la base de données
+	require_once __DIR__ . '/../config/db.php';
+	
 	// Inclusion du fichier user
 	require_once __DIR__ . '/../user/user.php';
 	$user = getUser();
@@ -116,6 +119,17 @@ try {
  
 				
 				break;
+
+		case 'editTask':
+			$id = $_GET['idTask'] ?? null;
+			require_once __DIR__ . '/../tasks/getTaskById.php';
+
+			$task = getTaskById($id);
+
+			$data  	= [
+				"task" => $task,
+			];
+			break;
 		default:
 			$data = ["message" => "Page not found"];
 	}

@@ -103,7 +103,7 @@ function renderTasks(filter = 'all', searchTerm = '') {
 				<strong>${task.title}</strong>
 				<p>${task.description ? task.description : '<em>Aucune description</em>'}</p>
 				<div class="task-meta">
-					<span>📅 ${dueDateText}</span>
+					<span>📅 ${dueDateText.split(' ')[0]}</span>
 					<span>📊 ${statusText}</span>
 				</div>
 			</div>
