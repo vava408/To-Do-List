@@ -6,6 +6,7 @@
   <title>Accueil - Gestionnaire de Tâches</title>
   <script src="../assets/js/darkMode.js"></script>
   <link rel="stylesheet" href="../assets/css/home.css" />
+  <link rel="stylesheet" href="../assets/css/aide.css" />
   <script type="module" src="../assets/js/home.js"></script>  
 </head>
 <body>
@@ -22,9 +23,17 @@
 						 </div>
 				    </label>
 				</div>
-				<a href="../pages/tasks.html">Mes Tâches</a>
-				<a href="../pages/profile.html">Profil</a>
-				<a href="../auth/logout.php" id="logoutOrLogin">Déconnexion</a>
+				<a href="../pages/tasks.html" class="tooltip">Mes Tâches
+					<span class="tooltip-text" >
+						Permet de creer les taches et de voir les dernieres taches ajoutées.
+					</span>
+				</a>
+				<a href="../pages/profile.html" class="tooltip">Profil
+					<span class="tooltip-text">
+						Accédez à votre profil utilisateur.
+					</span>
+				</a>
+				<a href="../auth/logout.php" id="logoutOrLogin" class="tooltip">Déconnexion</a>
 			</nav>
 		</header>
 
@@ -57,7 +66,11 @@
 				<li><span class="emoji">🕓</span><span id="task-in-progresse">[texte derniere tache en cours]</span></li>
 				<li><span class="emoji">⏳</span><span id="task-not-start">[texte derniere tache non commencee]</span></li>
 			</ul>
-			<a class="btn" href="./mestasks.html">Voir toutes les tâches</a>
+			<a class="btn tooltip" href="./mestasks.html">Voir toutes les tâches
+				<span class="tooltip-text">
+					Affiche la liste complète de vos tâches.
+				</span>
+			</a>
 		</section>
 	</div>
 </body>

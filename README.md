@@ -18,13 +18,13 @@ Elle est **synchronisée avec une base de données**, ce qui vous permet une **s
 - 🔐 Connexion / Inscription  
 - 🔄 Modifier le mot de passe  
 - 👤 Modifier le nom d’utilisateur
-- ⚡ Afficher les tâches en fonction du niveau de priorité   
+- ⚡ Afficher les tâches en fonction du niveau de priorité
+- 📝 Modifier une tâche  
 
 ---
 
 ## 🛠️ Fonctionnalités prévues  
 
-- 📝 Modifier une tâche  
 - 📱 Créer une application mobile sur téléphone avec **React Native**  
 - Afficher plus clairement les taches prioritaires
 - Mettre les s en automatique
@@ -32,8 +32,7 @@ Elle est **synchronisée avec une base de données**, ce qui vous permet une **s
 - faire un onglet pilotages qui afichera le nombre de taches urgente faite dans la semaine / detaille des tahces effectuer
 - Ajout d'un calendrier
 - Envoie de mail pour dire faire la taches. 
-- Choisir delai  ou repeter tout les x temps
-- 
+- Choisir delai  ou repeter tout les x temp
 
 
 ---
