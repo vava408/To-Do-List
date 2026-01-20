@@ -7,6 +7,7 @@
 	<script src="../assets/js/darkMode.js"></script>
 	<link rel="stylesheet" href="../assets/css/home.css" />
 	<link rel="stylesheet" href="../assets/css/mes-tasks.css">
+	<link rel="stylesheet" href="../assets/css/aide.css" />
 	<script type="module" src="../assets/js/mestasks.js"></script>
 	<style>
 
@@ -27,9 +28,21 @@
 						 </div>
 				    </label>
 				</div>
-				<a href="../pages/home.html">Accueil</a>
-				<a href="../pages/profile.html">Profil</a>
-				<a href="../auth/logout.php" id="logoutOrLogin">Déconnexion</a>
+				<a href="../pages/home.html" class="tooltip">Accueil
+					<span class="tooltip-text">
+						Retourne a l'accueil.
+					</span>
+				</a>
+				<a href="../pages/profile.html" class="tooltip">Profil
+					<span class="tooltip-text">
+						Accédez à votre profil utilisateur.
+					</span>
+				</a>
+				<a href="../auth/logout.php" id="logoutOrLogin" class="tooltip">Déconnexion
+					<span class="tooltip-text">
+						Se déconnecter de votre compte.
+					</span>
+				</a>
 			</nav>		
 		</header>
 
@@ -39,10 +52,21 @@
 			<!-- Contrôles de filtrage -->
 			<div class="controls">
 				<div class="filter-group">
-					<button class="filter-btn active" data-filter="all">Toutes</button>
-					<button class="filter-btn" data-filter="not_started">À faire</button>
-					<button class="filter-btn" data-filter="in_progress">En cours</button>
-					<button class="filter-btn" data-filter="completed">Terminées</button>
+					<button class="filter-btn active tooltip" data-filter="all">Toutes
+						<span class="tooltip-text">
+							Afficher toutes les tâches.
+						</span>
+					</button>
+					<button class="filter-btn tooltip" data-filter="in_progress">En cours
+						<span class="tooltip-text">
+							Afficher les tâches en cours.
+						</span>
+					</button>
+					<button class="filter-btn tooltip" data-filter="completed">Terminées
+						<span class="tooltip-text">
+							Afficher les tâches terminées.
+						</span>
+					</button>
 				</div>
 				<div class="search-box">
 					<input type="text" id="searchInput" placeholder="🔍 Rechercher une tâche...">
